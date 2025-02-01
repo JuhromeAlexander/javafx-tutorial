@@ -19,6 +19,7 @@ public class Main extends Application {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/image1.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/image2.jpg"));
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
@@ -81,7 +82,13 @@ public class Main extends Application {
     }
 
     private void handleUserInput() {
-        dialogContainer.getChildren().addAll(new DialogBox(userInput.getText(), userImage));
+        String userText = userInput.getText();
+        String dukeText = duke.getResponse(userInput.getText());
+
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, userImage),
+                new DialogBox(dukeText, dukeImage)
+        );
         userInput.clear();
     }
 }
