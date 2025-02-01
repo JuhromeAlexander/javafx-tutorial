@@ -86,8 +86,8 @@ public class Main extends Application {
         String dukeText = duke.getResponse(userInput.getText());
 
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, userImage),
-                new DialogBox(dukeText, dukeImage)
+                DialogBox.getUserDialog(userText, userImage),
+                DialogBox.getDukeDialog(dukeText, dukeImage)
         );
         userInput.clear();
     }
