@@ -30,12 +30,18 @@ public class Main extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
-        DialogBox dialogBox = new DialogBox("Hello, World!", userImage);
-        dialogContainer.getChildren().add(dialogBox);
+        // Handle User Input
+        sendButton.setOnMouseClicked(event -> {
+            handleUserInput();
+        });
+        userInput.setOnAction(event -> {
+            handleUserInput();
+        });
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
+        // Formatting of Stage and Scene
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -69,5 +75,13 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
+        // Scroll down to end after dialogcontainer height change
+        dialogContainer.heightProperty().addListener((observable -> scrollPane.setVvalue(1.0)));
+
+    }
+
+    private void handleUserInput() {
+        dialogContainer.getChildren().addAll(new DialogBox(userInput.getText(), userImage));
+        userInput.clear();
     }
 }
